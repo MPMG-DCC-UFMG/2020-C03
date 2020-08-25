@@ -1,0 +1,29 @@
+{
+  "input":[
+{"addr": "Rua Augusto dos Anjos, 400, Rio Branco, Belo Horizonte"},
+{"coord": ["-19.814856", "-43.974733"]},
+{"addr": "Rua Antonio Rodrigues Froes 260, Venda Nova",
+ "coord": ["-19.808437", "-43.972109"]},
+    {
+      "addr":"rua sol, n 12, belo horizonte",
+      "coord":[
+        "23.333",
+        "23.333"
+      ]
+    },
+    {
+      "addr":"rua estrela, n 25, contagem",
+      "coord":[
+        "24.333",
+        "24.333"
+      ]
+    },
+    {
+      "addr":"rua lua, n 84, betim",
+      "coord":[
+        "25.333",
+        "25.333"
+      ]
+    }
+  ]
+}
