@@ -108,8 +108,8 @@ class Downloader(object):
         for i, q in enumerate(query):
             img_type = 'coord'
             i_type = ia_type = 0
-            i_aerial, i_ground = '', ''
-            ia_aerial, ia_ground = '', ''
+            i_aerial, i_ground, id = '', '', ''
+            ia_aerial, ia_ground, id_a = '', '', ''
             if 'coord' in q.keys():
                 i_aerial, i_ground, i_type, id= self.download_loc(q['coord'], 'coord')
             if 'addr' in q.keys() and i_type != 3:
