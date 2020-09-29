@@ -13,7 +13,7 @@ def get_input (file):
 def write_final_log (results_dict, out_file):
     data = {}
     data ['output'] = []
-    classes = ['Apartment', 'House', 'School', 'Parking Lot', 'Hospital', 'Religious', 'Industrial', 'Store', 'Vacant Lot']
+    classes = ['apartment', 'house', 'school', 'parking_lot', 'hospital', 'religious', 'industrial', 'store', 'vacant_lot']
 
     for key, item in results_dict.items():
         i = item['softmax']
