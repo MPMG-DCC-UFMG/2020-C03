@@ -20,8 +20,9 @@ def write_final_log (results_dict, out_file):
         if len(i) != 0:
             i_array = np.array(i)
             indices = i_array.argsort()[-3:][::-1]
-            data['output'].append({item['id_type'] : item['repr'], 'class' : classes[indices[0]], 'score': str(round(i[indices[0]],10)),
-                       'top-3': [{'class' : classes[indices[0]], 'score': str(round(i[indices[0]],10))},
+            data['output'].append({item['id_type'] : item['repr'], 'id':item['id'],
+                        'class' : classes[indices[0]], 'score': str(round(i[indices[0]],10)),
+                        'top-3': [{'class' : classes[indices[0]], 'score': str(round(i[indices[0]],10))},
                                  {'class' : classes[indices[1]], 'score': str(round(i[indices[1]],10))},
                                  {'class' : classes[indices[2]], 'score': str(round(i[indices[2]],10))}]})
         else:
@@ -29,4 +30,3 @@ def write_final_log (results_dict, out_file):
 
     with open (out_file, 'w') as outfile:
         json.dump(data, outfile, indent = 4, separators = (',', ':'))
-    

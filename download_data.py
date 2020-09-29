@@ -56,7 +56,7 @@ class Downloader(object):
         a = eval(t)
 
         if not a['status'] == "OK":
-            return '', '', 0
+            return '', '', 0, ''
 
         basename = a['pano_id']
         file_img_street = os.path.join(self.outf_street, basename + ".jpg")
@@ -101,7 +101,7 @@ class Downloader(object):
                     os.remove(file_img_aerial)
                 file_img_aerial = ''
 
-        return file_img_aerial, file_img_street, img_type
+        return file_img_aerial, file_img_street, img_type, basename
 
     def fecth_query(self, query):
         img_dict = OrderedDict()
@@ -111,16 +111,17 @@ class Downloader(object):
             i_aerial, i_ground = '', ''
             ia_aerial, ia_ground = '', ''
             if 'coord' in q.keys():
-                i_aerial, i_ground, i_type = self.download_loc(q['coord'], 'coord')
+                i_aerial, i_ground, i_type, id= self.download_loc(q['coord'], 'coord')
             if 'addr' in q.keys() and i_type != 3:
-                ia_aerial, ia_ground, ia_type = self.download_loc(q['addr'], 'addr')
+                ia_aerial, ia_ground, ia_type, id_a = self.download_loc(q['addr'], 'addr')
                 img_type = 'addr'
 
             i_aerial = i_aerial if i_aerial != '' else ia_aerial
             i_ground = i_ground if i_ground != '' else ia_ground
+            i_id = id if id != '' else id_a
             i_type |= ia_type
 
-            img_dict[i] = {'id_type': img_type, 'repr': q[img_type], 'files':[i_aerial, i_ground, types[i_type]]}
+            img_dict[i] = {'id_type': img_type, 'repr': q[img_type], 'files':[i_aerial, i_ground, types[i_type]], 'id': i_id}
 
         return img_dict
 

@@ -59,7 +59,7 @@ def main():
             print ('Can not download any image for ' + str(infos['repr']) + ' using its ' + str(infos['id_type']) + '.')
             softmax = []
 
-        results_dict[key] = {'id_type': infos['id_type'], 'repr': infos['repr'], 'softmax': softmax}
+        results_dict[key] = {'id' : infos['id'], 'id_type': infos['id_type'], 'repr': infos['repr'], 'softmax': softmax}
 
     io.write_final_log (results_dict, os.path.join(output_path, out_file_name))
 
