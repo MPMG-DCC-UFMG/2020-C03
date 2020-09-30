@@ -127,7 +127,7 @@ class Downloader(object):
             i_aerial = i_aerial if i_aerial != '' else ia_aerial
             i_ground = i_ground if i_ground != '' else ia_ground
             i_id = id if id != '' else id_a
-            i_coord = q['coord'] if 'coord' in q.keys() else coord
+            i_coord = q['coord'] if 'coord' in q.keys() and i_type >= 2 else coord
             i_type |= ia_type
 
             img_dict[i] = {'id_type': img_type, 'repr': q[img_type], 'files':[i_aerial, i_ground, types[i_type]],
