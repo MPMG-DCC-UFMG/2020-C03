@@ -46,7 +46,7 @@ class Downloader(object):
         try:
             f = urllib.request.urlopen(meta_url)
         except:
-            return '', '', 0, ''
+            return '', '', 0, '', ''
 
         img_type = 3
         has_aerial = True
@@ -56,7 +56,7 @@ class Downloader(object):
         a = eval(t)
 
         if not a['status'] == "OK":
-            return '', '', 0, ''
+            return '', '', 0, '', ''
 
         basename = a['pano_id']      # get panoranama's google id
 
