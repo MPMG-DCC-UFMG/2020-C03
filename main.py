@@ -22,7 +22,7 @@ def main():
                         help='Path to aerial network model file.')
     parser.add_argument('--ground_model', type=str, required=True,
                         help='Path to ground network model file.')
-    parser.add_argument('--file_name', type=str, required=True,
+    parser.add_argument('--output_file', type=str, required=True,
                         help ='Name of the JSON output file.')
 
     args = parser.parse_args()
@@ -32,7 +32,7 @@ def main():
     output_path = args.output_path
     aerial_model = args.aerial_model
     ground_model = args.ground_model
-    out_file_name = args.file_name
+    out_file_name = args.output_file
     query = io.get_input(input_file)
 
     dl = Downloader(google_maps_key, output_path)
