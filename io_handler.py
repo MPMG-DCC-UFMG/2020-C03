@@ -25,6 +25,7 @@ def write_final_log (results_dict, out_file):
                         'top-3': [{'class' : classes[indices[0]], 'score': str(round(i[indices[0]],10))},
                                  {'class' : classes[indices[1]], 'score': str(round(i[indices[1]],10))},
                                  {'class' : classes[indices[2]], 'score': str(round(i[indices[2]],10))}]})
+            data['output'][-1]['coord'] = item['coord']
         else:
             data['output'].append({item['id_type'] : item['repr'], 'error': 'Coundn\'t download any image for location.'})
 

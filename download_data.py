@@ -46,7 +46,7 @@ class Downloader(object):
         try:
             f = urllib.request.urlopen(meta_url)
         except:
-            return '', '', 0
+            return '', '', 0, ''
 
         img_type = 3
         has_aerial = True
@@ -58,7 +58,14 @@ class Downloader(object):
         if not a['status'] == "OK":
             return '', '', 0, ''
 
-        basename = a['pano_id']
+        basename = a['pano_id']      # get panoranama's google id
+
+        # Get coordinates for location, if necessary
+        if type == 'addr':
+            coords = [str(a['location']['lat']), str(a['location']['lgn'])]
+        else:
+            coords = loc
+
         file_img_street = os.path.join(self.outf_street, basename + ".jpg")
         file_img_aerial = os.path.join(self.outf_aerial, basename + ".png")
         file_meta = os.path.join(self.outf_metadata, basename + ".json")
@@ -101,7 +108,7 @@ class Downloader(object):
                     os.remove(file_img_aerial)
                 file_img_aerial = ''
 
-        return file_img_aerial, file_img_street, img_type, basename
+        return file_img_aerial, file_img_street, img_type, basename, coords
 
     def fecth_query(self, query):
         img_dict = OrderedDict()
@@ -110,18 +117,21 @@ class Downloader(object):
             i_type = ia_type = 0
             i_aerial, i_ground, id = '', '', ''
             ia_aerial, ia_ground, id_a = '', '', ''
+            coord = ['lat', 'long']
             if 'coord' in q.keys():
-                i_aerial, i_ground, i_type, id= self.download_loc(q['coord'], 'coord')
+                i_aerial, i_ground, i_type, id, _= self.download_loc(q['coord'], 'coord')
             if 'addr' in q.keys() and i_type != 3:
-                ia_aerial, ia_ground, ia_type, id_a = self.download_loc(q['addr'], 'addr')
+                ia_aerial, ia_ground, ia_type, id_a, coord = self.download_loc(q['addr'], 'addr')
                 img_type = 'addr'
 
             i_aerial = i_aerial if i_aerial != '' else ia_aerial
             i_ground = i_ground if i_ground != '' else ia_ground
             i_id = id if id != '' else id_a
+            i_coord = q['coord'] if 'coord' in q.keys() else coord
             i_type |= ia_type
 
-            img_dict[i] = {'id_type': img_type, 'repr': q[img_type], 'files':[i_aerial, i_ground, types[i_type]], 'id': i_id}
+            img_dict[i] = {'id_type': img_type, 'repr': q[img_type], 'files':[i_aerial, i_ground, types[i_type]],
+                           'id': i_id, 'coord': i_coord}
 
         return img_dict
 
