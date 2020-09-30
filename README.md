@@ -30,5 +30,5 @@ Parâmetro | Tipo | Descrição
 --output_path | string | String com o caminho em que serão salvos as imagens baixadas e o JSON com as predições.
 --aerial_model | string | String com o caminho do arquivo para o modelo de classificação de imagens aéreas. 
 --ground_model | string | String com o caminho do arquivo para o modelo de classificação de imagens térreas. 
---file_name | String |Nome do arquivo JSON que conterá as saídas do modelo de classificação.
+--output_file | string |Nome do arquivo JSON que conterá as saídas do modelo de classificação.
 
