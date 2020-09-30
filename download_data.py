@@ -62,7 +62,7 @@ class Downloader(object):
 
         # Get coordinates for location, if necessary
         if type == 'addr':
-            coords = [str(a['location']['lat']), str(a['location']['lgn'])]
+            coords = [str(a['location']['lat']), str(a['location']['lng'])]
         else:
             coords = loc
 
