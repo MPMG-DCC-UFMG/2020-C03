@@ -1,22 +1,27 @@
 {
     "output":[
         {
-            "addr":"Rua Augusto dos Anjos, 400, Rio Branco, Belo Horizonte",
-            "class":"Store",
-            "score":"0.9870126",
+            "addr":"Rua Augusto dos Anjos, 400, Rio Branco, Belo H
+            "id":"4oagi1_8tKrRJ6XVFHGOSQ",
+            "class":"store",
+            "score":"0.8008633",
             "top-3":[
                 {
-                    "class":"Store",
-                    "score":"0.9870126"
+                    "class":"store",
+                    "score":"0.8008633"
                 },
                 {
-                    "class":"House",
-                    "score":"0.012913388"
+                    "class":"apartment",
+                    "score":"0.12180214"
                 },
                 {
-                    "class":"Industrial",
-                    "score":"6.35389e-05"
+                    "class":"house",
+                    "score":"0.024658011"
                 }
+            ],
+            "coord":[
+                "-19.81940619847392",
+                "-43.97783161721193"
             ]
         },
         {
@@ -24,100 +29,118 @@
                 "-19.814856",
                 "-43.974733"
             ],
-            "class":"School",
-            "score":"0.9992715",
+            "id":"rYghsYGb0uR9iTq6bK4a9g",
+            "class":"house",
+            "score":"0.32860163",
             "top-3":[
                 {
-                    "class":"School",
-                    "score":"0.9992715"
+                    "class":"house",
+                    "score":"0.32860163"
                 },
                 {
-                    "class":"House",
-                    "score":"0.0003122954"
+                    "class":"school",
+                    "score":"0.31494153"
                 },
                 {
-                    "class":"Industrial",
-                    "score":"0.0002056004"
+                    "class":"apartment",
+                    "score":"0.21491449"
                 }
             ]
         },
         {
+            "addr":"Rua Antonio Rodrigues Froes 260, Venda Nova",
+            "id":"Os4ffD1UiHsagTQRwBpg0A",
+            "class":"industrial",
+            "score":"0.3932258",
+            "top-3":[
+                {
+                    "class":"industrial",
+                    "score":"0.3932258"
+                },
+                {
+                    "class":"school",
+                    "score":"0.33023298"
+                },
+                {
+                    "class":"house",
+                    "score":"0.11699912"
+                }
+            ],
             "coord":[
                 "-19.808437",
                 "-43.972109"
-            ],
-            "class":"Industrial",
-            "score":"0.9994606",
-            "top-3":[
-                {
-                    "class":"Industrial",
-                    "score":"0.9994606"
-                },
-                {
-                    "class":"Store",
-                    "score":"0.0004676807"
-                },
-                {
-                    "class":"School",
-                    "score":"3.36625e-05"
-                }
             ]
         },
         {
             "addr":"rua sol, n 12, belo horizonte",
-            "class":"House",
-            "score":"0.9999947",
+            "id":"rGerIxLh6Yu13VQhN9elDw",
+            "class":"industrial",
+            "score":"0.43019617",
             "top-3":[
                 {
-                    "class":"House",
-                    "score":"0.9999947"
+                    "class":"industrial",
+                    "score":"0.43019617"
                 },
                 {
-                    "class":"Vacant Lot",
-                    "score":"3.4735e-06"
+                    "class":"house",
+                    "score":"0.23258078"
                 },
                 {
-                    "class":"Store",
-                    "score":"1.6548e-06"
+                    "class":"school",
+                    "score":"0.19996722"
                 }
+            ],
+            "coord":[
+                "-19.8938806",
+                "-43.983741"
             ]
         },
         {
             "addr":"rua estrela, n 25, contagem",
-            "class":"House",
-            "score":"0.99943894",
+            "id":"3nVe_2w7SQnTqEUPqrKJOA",
+            "class":"house",
+            "score":"0.36660445",
             "top-3":[
                 {
-                    "class":"House",
-                    "score":"0.99943894"
+                    "class":"house",
+                    "score":"0.36660445"
                 },
                 {
-                    "class":"Apartment",
-                    "score":"0.0004429979"
+                    "class":"industrial",
+                    "score":"0.30524012"
                 },
                 {
-                    "class":"Religious",
-                    "score":"9.68852e-05"
+                    "class":"apartment",
+                    "score":"0.18108943"
                 }
+            ],
+            "coord":[
+                "-19.9693287",
+                "-44.0167032"
             ]
         },
         {
             "addr":"rua lua, n 84, betim",
-            "class":"House",
-            "score":"0.99861073",
+            "id":"dHz03nAnRZbAhS2RA2mWgA",
+            "class":"house",
+            "score":"0.58899087",
             "top-3":[
                 {
-                    "class":"House",
-                    "score":"0.99861073"
+                    "class":"house",
+                    "score":"0.58899087"
                 },
                 {
-                    "class":"Industrial",
-                    "score":"0.0012212874"
+                    "class":"store",
+                    "score":"0.3743877"
                 },
                 {
-                    "class":"Store",
-                    "score":"0.000115216"
+                    "class":"religious",
+                    "score":"0.014973987"
                 }
+            ],
+            "coord":[
+                "-19.94165266375694",
+                "-44.20175857432751"
             ]
         }
     ]
