@@ -236,10 +236,6 @@ def sk_resnet152(pretrained=False, **kwargs):
     return model
 
 
-# def softmax(A):
-#     e = np.exp(A)
-#     return  e / e.sum(axis=0).reshape((-1,1))
-
 def infer (model, image_path):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
@@ -255,6 +251,4 @@ def infer (model, image_path):
     batch_t = batch_t.to(device)
     with torch.set_grad_enabled(False):
         output = model(batch_t)
-        #print (output.data.cpu().numpy())
         return softmax(output.data.cpu().numpy())[0]
-        

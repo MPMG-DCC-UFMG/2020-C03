@@ -1,7 +1,14 @@
 import json
 import numpy as np
 
+# Process the JSON input file
 def get_input (file):
+    """
+    file: path to the formated json input file
+
+    return:
+        query: list of locations(dict objects), only locations with fields 'addr'(address) or 'coord'(coordinate) are keeped
+    """
     query = []
     with open(file) as json_file:
         data = json.load(json_file)
@@ -11,6 +18,10 @@ def get_input (file):
     return query
 
 def write_final_log (results_dict, out_file):
+    """
+    results_dict: dict object containing the model predictions and informations of respective locations
+    out_file: path of the output file
+    """
     data = {}
     data ['output'] = []
     classes = ['apartment', 'house', 'school', 'parking_lot', 'hospital', 'religious', 'industrial', 'store', 'vacant_lot']

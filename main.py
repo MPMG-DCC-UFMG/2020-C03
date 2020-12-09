@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--output_file', type=str, required=True,
                         help ='Name of the JSON output file.')
 
+    # Parsing arguments
     args = parser.parse_args()
     google_maps_key = args.google_maps_key
     google_sview_key = args.google_sview_key
@@ -33,15 +34,19 @@ def main():
     aerial_model = args.aerial_model
     ground_model = args.ground_model
     out_file_name = args.output_file
+
+    # Process the JSON input file, and get a list of adrresses to compute
     query = io.get_input(input_file)
 
+    # Instantiate a Dowloader object and dowload the images present in the query
     dl = Downloader(google_maps_key, output_path)
-    img_dict = dl.fecth_query(query)
+    img_dict = dl.fetch_query(query)
 
+    # Loop through the locations and classify them
     results_dict = OrderedDict()
     for key, infos in img_dict.items():
         softmax = []
-        img_files = infos['files']
+        img_files = infos['files'] # List in the format [string: path to aerial img, string: path to street img, string: typeof imgs (i.e. none, aerial, ground, both)]
         if (img_files[2] == 'both'):
             a_model = torch.load(aerial_model)
             soft_a = net.infer(a_model, img_files[0])
@@ -61,6 +66,7 @@ def main():
 
         results_dict[key] = {'id': infos['id'], 'id_type': infos['id_type'], 'repr': infos['repr'], 'softmax': softmax, 'coord':infos['coord']}
 
+    # Write the output file
     io.write_final_log (results_dict, os.path.join(output_path, out_file_name))
 
 

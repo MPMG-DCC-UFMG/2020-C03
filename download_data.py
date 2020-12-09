@@ -5,6 +5,7 @@ import csv
 import os, sys
 from collections import OrderedDict
 
+# Types of images presents for a location
 types = {0: 'none', 1: 'aerial', 2: 'ground', 3: 'both'}
 
 def check_dir(dir):
@@ -12,6 +13,13 @@ def check_dir(dir):
         os.mkdir(dir)
 
 class Downloader(object):
+    """
+    Handles the download of the images.
+
+    key: Key of the API used to get the images.
+    output_path: path that will receive the data downloaded.
+    base_*: base string of the respective API relative to the type of data they collect
+    """
 
     def __init__(self, key, output_path,
                 base_street="https://maps.googleapis.com/maps/api/streetview?size=500x500&location=",
@@ -33,13 +41,26 @@ class Downloader(object):
         check_dir(self.outf_aerial)
         check_dir(self.outf_metadata)
 
+    # Format the locations for use by the API call
     def prep_loc(self, loc, type):
         if type == 'addr':
             return urllib.parse.quote_plus(loc)
         elif type == 'coord':
             return urllib.parse.quote_plus(loc[0] + ',' + loc[1])
 
+    # Dowload the data for a location
     def download_loc(self, loc, type):
+        """
+        loc: location information, can be a string for the address, or a tuple of strings for coordinates
+        type: type of the location (ie, 'addr' or 'coord')
+
+        returns:
+            file_img_aerial: path to the aerial image file. (Empty if the image couldn't be downloaded)
+            file_img_street: path to the street image file. (Empty if the image couldn't be downloaded)
+            img_type: int representing the type of images dowloaded.
+            basename: a string that represents the location. (ie. the google panorama id of the streetview image)
+            coords: a tuple of strings representing the coordinates of the location ('lat', 'long')
+        """
         formated_loc = self.prep_loc(loc, type)
         meta_url = self.base_metadata + formated_loc + self.key
 
@@ -58,7 +79,7 @@ class Downloader(object):
         if not a['status'] == "OK":
             return '', '', 0, '', ''
 
-        basename = a['pano_id']      # get panoranama's google id
+        basename = a['pano_id']      # get panorama's google id
 
         # Get coordinates for location, if necessary
         if type == 'addr':
@@ -73,6 +94,7 @@ class Downloader(object):
         meta = open(file_meta, "wb")
         meta.write(t.encode('utf-8'))
 
+        # Try to fetch the street image
         try:
             base = self.base_street + formated_loc + self.key
             urllib.request.urlretrieve(base, file_img_street)
@@ -80,6 +102,7 @@ class Downloader(object):
             has_street = False
             all_data = False
 
+        # Try to fetch the aerial image
         try:
             base = self.base_aerial + formated_loc + self.key
             urllib.request.urlretrieve(base, file_img_aerial)
@@ -110,7 +133,15 @@ class Downloader(object):
 
         return file_img_aerial, file_img_street, img_type, basename, coords
 
-    def fecth_query(self, query):
+    # Fetch the images for all locations dicts in query list
+    def fetch_query(self, query):
+        """
+        query: list of location dictionaries
+
+        returns:
+            img_dict: dict object containing a dictionate for each object in query.
+                      These dictionaries contain information necessary to process each location.
+        """
         img_dict = OrderedDict()
         for i, q in enumerate(query):
             img_type = 'coord'
