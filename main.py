@@ -83,7 +83,9 @@ def main():
             results_dict[key].update({'coord':infos['coord']})
 
     # Write the output file
-    io.write_final_log (results_dict, os.path.join(output_path, out_file_name))
+    add_field = []
+    if mode == 'complete': add_field.append('coord')
+    io.write_final_log (results_dict, os.path.join(output_path, out_file_name), add_field=add_field)
 
 
 
