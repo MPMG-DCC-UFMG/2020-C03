@@ -1,0 +1,13 @@
+{
+    "input":[
+  {
+   "id": "farmacia",
+   "aerial": "example_imgs/1tmDQKrZXEengx9zwRkvWA.png",
+   "street": "example_imgs/1tmDQKrZXEengx9zwRkvWA.jpg"},
+  {"aerial": "example_imgs/1tmDQKrZXEengx9zwRkvWA.png",
+   "street": ""},
+  {"id": "lote",
+   "aerial": "",
+   "street": "example_imgs/77mmW4mf6xnFskfe9pzZ0Q.jpg"}
+  ]
+}

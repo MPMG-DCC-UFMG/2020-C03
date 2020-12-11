@@ -24,6 +24,8 @@ def main():
                         help='Path to ground network model file.')
     parser.add_argument('--output_file', type=str, required=True,
                         help ='Name of the JSON output file.')
+    parser.add_argument('--mode', type=str, required=False, default='complete',
+                        help ='Mode of execution of the script. [download|classify|complete]')
 
     # Parsing arguments
     args = parser.parse_args()
@@ -34,13 +36,25 @@ def main():
     aerial_model = args.aerial_model
     ground_model = args.ground_model
     out_file_name = args.output_file
+    mode = args.mode.lower()
+
+    assert mode in ['download', 'complete', 'classify'], 'The mode {} is not supported.'.format(mode)
 
     # Process the JSON input file, and get a list of adrresses to compute
-    query = io.get_input(input_file)
+    query = io.get_input(input_file, mode=mode)
 
-    # Instantiate a Dowloader object and dowload the images present in the query
-    dl = Downloader(google_maps_key, output_path)
-    img_dict = dl.fetch_query(query)
+    # If its necessary to dowload images the img_dict is produced via the query
+    if mode in ['download', 'complete']:
+        # Instantiate a Dowloader object and dowload the images present in the query
+        dl = Downloader(google_maps_key, output_path)
+        img_dict = dl.fetch_query(query)
+    # Otherwise, the query object will be constructed in the img_dict format
+    else:
+        img_dict = query
+
+    # If the classification is not necessary, finish the process
+    if mode == 'download':
+        exit()
 
     # Loop through the locations and classify them
     results_dict = OrderedDict()
@@ -64,7 +78,9 @@ def main():
             print ('Can not download any image for ' + str(infos['repr']) + ' using its ' + str(infos['id_type']) + '.')
             softmax = []
 
-        results_dict[key] = {'id': infos['id'], 'id_type': infos['id_type'], 'repr': infos['repr'], 'softmax': softmax, 'coord':infos['coord']}
+        results_dict[key] = {'id': infos['id'], 'id_type': infos['id_type'], 'repr': infos['repr'], 'softmax': softmax}
+        if mode == 'complete':
+            results_dict[key].update({'coord':infos['coord']})
 
     # Write the output file
     io.write_final_log (results_dict, os.path.join(output_path, out_file_name))
