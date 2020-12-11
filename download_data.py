@@ -36,7 +36,6 @@ class Downloader(object):
         self.outf_aerial = os.path.join(output_path,"aerial")
         self.outf_metadata = os.path.join(output_path,"metadata")
 
-        check_dir(self.output_path)
         check_dir(self.outf_street)
         check_dir(self.outf_aerial)
         check_dir(self.outf_metadata)

@@ -5,7 +5,7 @@ import sknet as net
 import numpy as np
 import os
 from collections import OrderedDict
-from download_data import Downloader
+from download_data import Downloader, check_dir
 from scipy.special import softmax as softnorm
 
 def main():
@@ -37,6 +37,8 @@ def main():
     ground_model = args.ground_model
     out_file_name = args.output_file
     mode = args.mode.lower()
+
+    check_dir(output_path)
 
     assert mode in ['download', 'complete', 'classify'], 'The mode {} is not supported.'.format(mode)
 
