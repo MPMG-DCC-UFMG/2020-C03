@@ -31,4 +31,6 @@ Parâmetro | Tipo | Descrição
 --aerial_model | string | String com o caminho do arquivo para o modelo de classificação de imagens aéreas. 
 --ground_model | string | String com o caminho do arquivo para o modelo de classificação de imagens térreas. 
 --output_file | string |Nome do arquivo JSON que conterá as saídas do modelo de classificação.
+--mode | string | **Opcional**. Esse parâmetro define o modo como a ferramenta será utilizada. Existem três valores possíveis para esse parâmetro: <ul><li>_complete_: (Valor padrão) a ferramenta executa todo o processo, isto é, recebe a lista de endereços, coleta as imagens, e classifica cada uma das localizações.</li><li>_download_: a ferramenta recebe a lista de localizações e, apenas, coleta as imagens.</li><li>_classify_: a ferramenta recebe uma lista de imagens(ver seção 3.2) e classifica cada uma das entradas.</li>  
+
 
